@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:helpers="clr-namespace:SeriesTags.Helpers"
+                    >
+    <helpers:BooleanOpposetConverter x:Key="BooleanOpposetConverter"/>
+    <helpers:BooleanOppositConverter x:Key="BooleanOppositConverter"/>
+    <helpers:BooleanScrollVisibilityConverter x:Key="BooleanScrollVisibilityConverter"/>
+    <helpers:BooleanVisibility_CollapseConverter x:Key="BooleanVisibility_CollapseConverter"/>
+    <helpers:BooleanVisibility_HiddenConverter x:Key="BooleanVisibility_HiddenConverter"/>
+    <helpers:CollectionToStringConverter x:Key="CollectionToStringConverter"/>
+    <helpers:EnumToStringConverter x:Key="EnumToStringConverter"/>
+    <helpers:DoubleDividerConverter x:Key="DoubleDividerConverter"/>
+    <helpers:IntToBrushConverter x:Key="IntToBrushConverter"/>
+    <helpers:IntToColorConverter x:Key="IntToColorConverter"/>
+</ResourceDictionary>

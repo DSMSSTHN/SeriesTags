@@ -1,0 +1,108 @@
+﻿<Page x:Class="SeriesTags.Pages.EpisodeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SeriesTags.Pages"
+             mc:Ignorable="d"
+             PreviewKeyDown="EpisodeKeyDown"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" MinHeight="40"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" MinHeight="40"/>
+                <RowDefinition Height="auto" MinHeight="40"/>
+                <RowDefinition Height="auto" MinHeight="40"/>
+                <RowDefinition Height="auto" MinHeight="80"/>
+                <RowDefinition Height="auto" MinHeight="40"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Background="SlateGray" VerticalAlignment="Center" Width="25" Height="25" HorizontalContentAlignment="Center" Click="GoBack">
+                <Image Source="/Icons/ArrowLeft.png" Margin="7 0 0 0"/>
+            </Button>
+            <TextBlock  Grid.Column="1" TextAlignment="Center" Text="{Binding Episode.Episode}" d:Text="15" FontWeight="Bold"/>
+            <Button  Grid.Column="1" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Episode.Episode}"
+                     d:Content="15"  Padding="10 0" Background="#01f366" d:Visibility="Collapsed" Click="OpenEpisodeFile"
+                     Visibility="{Binding Episode.EpisodeExists,Converter={StaticResource BooleanVisibility_CollapseConverter}}" FontWeight="Bold"/>
+            <Slider Minimum="0" Maximum="10" Value="{Binding Episode.Rating}" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="150" />
+            <Button Grid.RowSpan="8" Grid.Row="1" VerticalAlignment="Center" Width="25" Height="25" HorizontalContentAlignment="Center" Margin="2 0 2 0" Click="PreviousEpisode">
+                <Image Source="/Icons/ArrowLeft.png" Margin="7 0 0 0"/>
+            </Button>
+            <Button Grid.RowSpan="8" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Width="25" Height="25" HorizontalContentAlignment="Center" Margin="2 0 2 0" Click="NextEpisode">
+                <Image Source="/Icons/ArrowRight.png" Width="15" Margin="4 0 0 0"/>
+            </Button>
+            <TextBlock Text="Title" TextAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="TitleTextBox" Text="{Binding Episode.Title,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center"/>
+            <TextBlock Text="Description" TextAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Episode.Description,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" TextAlignment="Center"/>
+
+            <ListView Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Episode.Tags}" Height="30" HorizontalAlignment="Stretch"  VerticalContentAlignment="Stretch">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=ListView},Path=ActualWidth}"
+                               HorizontalAlignment="Center"
+                               Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+                            <Button BorderThickness="0" Content="{Binding Name}" Background="{Binding TagColor}"/>
+                            <Button Grid.Column="1" Background="Red" Content="X" Click="RemoveTag"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Grid.Row="6" Grid.Column="1">
+                <TextBox  d:Text="Some Tag" x:Name="TagTextBox"  GotFocus="SelectAllFocus" VerticalAlignment="Center" Text="{Binding TagFilter,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Left" PreviewKeyDown="TagKeyDown"/>
+                <TextBlock Opacity="0.6" d:Text="Some Tag" Margin="3 0 0 0" VerticalAlignment="Center" Text="{Binding TagSuggestion}" TextAlignment="Left"/>
+            </StackPanel>
+            <ListView Grid.Row="7" Grid.Column="1" ItemsSource="{Binding Episode.Links}" Height="30" HorizontalAlignment="Stretch"  VerticalContentAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding}"/>
+                            <Button Grid.Column="1" Content="X" Background="Red" Click="RemoveLink"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBox x:Name="LinkTextBox" Text="{Binding LinkText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" GotFocus="SelectAllFocus" PreviewKeyDown="LinkKeyDown" Grid.Column="1" Grid.Row="8"/>
+            <ListView ItemsSource="{Binding Episode.Photos}" 
+                      HorizontalContentAlignment="Center"
+                      IsHitTestVisible="False"  Grid.Row="9" Grid.Column="1">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=ListView},Path=ActualWidth}" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#33ffffff" Padding="5" BorderThickness="10" CornerRadius="10">
+                            <Image MaxHeight="300" HorizontalAlignment="Center" Source="{Binding Path=.}"/>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ScrollViewer>
+</Page>

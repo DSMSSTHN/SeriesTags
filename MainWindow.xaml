@@ -1,0 +1,15 @@
+﻿<Window x:Class="SeriesTags.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeriesTags"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        Background="#1e1e1e"
+        >
+  
+    <Grid>
+        <Frame x:Name="MainPage"  Source="Pages/RecentsView.xaml" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
