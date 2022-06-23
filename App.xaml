@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/BGs.xaml"/>
                 <ResourceDictionary Source="Styles/Converters.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
          

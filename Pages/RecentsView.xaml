@@ -15,16 +15,26 @@
         <ListView ItemsSource="{Binding Series}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Button Click="SeriesClicked" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Button Click="SeriesClicked" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Margin="15" Padding="5"
+                            Background="Transparent" BorderThickness="2">
                         <Grid >
                             <Image Height="200" Source="{Binding ImagePath}" HorizontalAlignment="Center"/>
                             <TextBlock Text="{Binding Title}" Background="#dd1e1e1e" Padding="0 0 0 3" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-                            <TextBlock Text="{Binding EpisodeCount,StringFormat=' ${0} Episodes'}" Background="#dd1e1e1e" Padding="0 3 0 0" VerticalAlignment="Bottom"/>
+                            <TextBlock Text="{Binding EpisodeCount,StringFormat=' {0} Episodes'}" Background="#dd1e1e1e" Padding="0 3 0 0" VerticalAlignment="Bottom"/>
                         </Grid>
                     </Button>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="1" Content="Add" Background="Green" Click="AddClicked"  />
+        <Button Margin="10"
+                Grid.RowSpan="3" VerticalAlignment="Bottom" 
+                HorizontalAlignment="Center" Content="+" FontWeight="Bold" 
+                Padding="0 -11 0 0" FontSize="40" Background="#cc35d061" Grid.Column="1" Width="100" Height="40" Click="AddClicked">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Page>

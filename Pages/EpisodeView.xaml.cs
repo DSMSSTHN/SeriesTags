@@ -249,5 +249,13 @@ namespace SeriesTags.Pages {
                 process.Start();
             }
         }
+
+        private void OpenLink(object sender, RoutedEventArgs e) {
+            var link = (sender as Button)?.DataContext as string;
+            if (link == null) return;
+            try {
+                link.OpenInChrome();
+            } catch { }
+        }
     }
 }

@@ -5,11 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SeriesTags"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="#1e1e1e"
+        Title="MainWindow" Height="450" Width="450"
+        AllowsTransparency="True" WindowStyle="None"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip" BorderThickness="0" BorderBrush="Transparent"
         >
-  
-    <Grid>
-        <Frame x:Name="MainPage"  Source="Pages/RecentsView.xaml" NavigationUIVisibility="Hidden"/>
-    </Grid>
+
+
+    <Border Padding="5" Background="#1e1e1e" CornerRadius="15" BorderThickness="2" BorderBrush="#3e3e3e">
+        <DockPanel Background="Transparent">
+            <Grid DockPanel.Dock="Top" Height="40" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <Button Click="MinimizeClicked" Content="-" Width="40" FontSize="28" VerticalContentAlignment="Top" Background="Transparent" BorderThickness="1" BorderBrush="#3e3e3e"/>
+                    <Button Content="◻" Click="MaximizeClicked" Width="40" FontSize="27" VerticalContentAlignment="Top" Background="Transparent" BorderThickness="1" BorderBrush="#3e3e3e"/>
+                    <Button Content="X" Click="CloseClicked" Width="40" FontSize="25" VerticalContentAlignment="Center" Background="Transparent" BorderThickness="1" BorderBrush="#3e3e3e"/>
+                </StackPanel>
+            </Grid>
+            <Frame DockPanel.Dock="Bottom" x:Name="MainPage"  Source="Pages/RecentsView.xaml" NavigationUIVisibility="Hidden"/>
+        </DockPanel>
+    </Border>
 </Window>

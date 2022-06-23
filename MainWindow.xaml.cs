@@ -30,6 +30,24 @@ namespace SeriesTags {
         public MainWindow() {
             STOptions.LoadRecents();
             InitializeComponent();
+            MouseLeftButtonDown += (a, b) => { try { DragMove(); } catch { } };
+            this.Closing += (a, b) => {
+                if (WindowState == WindowState.Minimized) WindowState = WindowState.Normal;
+                Properties.Settings.Default.Left = Left;
+                Properties.Settings.Default.Top = Top;
+                Properties.Settings.Default.Width = ActualWidth;
+                Properties.Settings.Default.Height = ActualHeight;
+                Properties.Settings.Default.IsMaximized = false;
+                Properties.Settings.Default.Save();
+            };
+            Left = Properties.Settings.Default.Left;
+            Top = Properties.Settings.Default.Top;
+            Width = Properties.Settings.Default.Width;
+            Height = Properties.Settings.Default.Height;
+            if (Properties.Settings.Default.IsMaximized) WindowState = WindowState.Maximized;
+            //this.Loaded += (a, b) => {
+               
+            //};
         }
 
 
@@ -131,5 +149,17 @@ namespace SeriesTags {
             }
         }
         #endregion
+
+        private void MinimizeClicked(object sender, RoutedEventArgs e) {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeClicked(object sender, RoutedEventArgs e) {
+            WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        }
+
+        private void CloseClicked(object sender, RoutedEventArgs e) {
+            Close();
+        }
     }
 }

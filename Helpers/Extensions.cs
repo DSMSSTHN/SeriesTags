@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,12 @@ namespace SeriesTags.Helpers {
             var res = new ObservableCollection<T>();
             foreach(var i in items) res.Add(i);
             return res;
+        }
+        public static void OpenInChrome(this string url) {
+
+            String chrome = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+            //var incognito = (Application.Current.MainWindow as MainWindow).IsIncognito;
+            Process.Start(chrome, url + " " + (false ? "--incognito --new-window" : "--new-window "));
         }
     }
 }
